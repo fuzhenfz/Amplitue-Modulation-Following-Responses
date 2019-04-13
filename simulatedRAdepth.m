@@ -14,7 +14,7 @@ RA_model = zeros(Total,length(Depth),100);
 RA_mean = zeros(Total,length(Depth));
 RA_std = zeros(Total,length(Depth));
 hwait = waitbar(0,'waiting...');
-for count = 1:100 % 仿真100次
+for count = 1:100 % simulating for 100 times
     waitbar(count/100,hwait,[num2str(count),'/100']);    
     for i = 1:Total
         Freq = Fre(i);
@@ -24,9 +24,8 @@ for count = 1:100 % 仿真100次
             [OutputAveragedCFs,output] = Output_SAM(Freq,cf,Depth(j),Carrier,fs,Dur);
             spec = abs(fft(OutputAveragedCFs));
             spec = [spec(2:length(spec)) 1];
-%             spec = resample(spec,fs/4,length(spec));% 重采样至fs/4
+            % relative amplitude
             RA = spec(x_Freq) / ((spec(x_Freq-1)+spec(x_Freq-2)+spec(x_Freq-3)+spec(x_Freq+1)+spec(x_Freq+2)+spec(x_Freq+3))/6);
-            %         RA = mean(spec(Freq-2:Freq+2)) / mean(spec([Freq-14:Freq-3,Freq+3:Freq+14]));
             RA = 20 * log10(RA);            
             RA_model(i,j,count) = RA;
         end
@@ -34,8 +33,8 @@ for count = 1:100 % 仿真100次
 end
 close(hwait);
 save('RA_model(allCFsCarrier)model1.mat','RA_model');
-%%
 
+%% plot
 
 for i=1:4
     for j=1:length(Depth)
