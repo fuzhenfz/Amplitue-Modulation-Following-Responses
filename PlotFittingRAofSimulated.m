@@ -1,7 +1,7 @@
 % scatter and fitting of RA for 32 Hz and -5 dB depth
 load('RA_model(allCFsCarrier)model1.mat')
 
-%% scatter for all modulation rates and depth
+%% scatter for all modulation rates and depth  
 Depth = -(0:30);
 Fre = [32 64 128 256];
 for i=1:4
