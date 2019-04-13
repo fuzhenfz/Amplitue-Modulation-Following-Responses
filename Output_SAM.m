@@ -106,9 +106,7 @@ for i0=1:length(cf)
     unitary_response = importdata('unitary_no_reg.mat');
     unitary_response = unitary_response(9:end);
     temp = conv(unitary_response,ic_sout(i0,:));
-    % plot(output)
-    %     output(i0,:) = temp;% 取全部
-    output(i0,:) = temp(1001:6000);% 取稳态的部分，此时长度为5000，恰好是采样率的1/4
+    output(i0,:) = temp(1001:6000);% using the sustained part
 end
 OutputAveragedCFs = mean(output);
-% 注：由于卷积具有交换律，所以((AN-VCN-IC)*UR)× 500cf 等价于 ((AN-VCN-IC) × 500cf) * UR 
+% due to the law of commutation, ((AN-VCN-IC)*UR)脳 500cf equals ((AN-VCN-IC) 脳 500cf) * UR 
