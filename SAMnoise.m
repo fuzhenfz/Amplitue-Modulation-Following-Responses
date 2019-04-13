@@ -31,7 +31,6 @@ am_tone2 = (sqrt(mean(stim1.^2))/sqrt(mean(stim22.^2))).*stim22;   % SAM tone (s
 
 %%
 figure
-
 sp1 = subplot(321);
 set(sp1,'position',[0.1 0.72 0.4 0.25])
 plot(t*1000,stim1/max(max(stim1),min(stim1)),'k')
